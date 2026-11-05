@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NB00: Project Overview — [WS26/27] Research Seminar / Forschungsseminar (MT und MIW)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$']],
+      displayMath: [['$$', '$$']],
+      packages: {'[+]': ['ams']}
+    },
+    options: { skipHtmlTags: ['script','noscript','style','textarea','pre'] },
+    chtml: { scale: 1.05 }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js" async></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:      #0d0f14;
+    --surface: #161a22;
+    --border:  #252b38;
+    --text:    #d8dce6;
+    --muted:   #5a6175;
+    --accent:  #4f9cf9;
+    --accent2: #a78bfa;
+    --green:   #34d399;
+    --orange:  #fb923c;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── header ── */
+  header {
+    border-bottom: 2px solid var(--border);
+    padding: 24px 0 20px;
+  }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .header-logo img { width: 100px; border-radius: 10px; display: block; }
+  .header-info h1 { font-size: clamp(18px,3vw,26px); font-weight: 500; color: #f0f2f7; line-height: 1.2; margin-bottom: 4px; }
+  .header-info h2 { font-size: 14px; font-weight: 400; color: var(--muted); font-family: var(--mono); margin-bottom: 8px; }
+  .header-meta { font-size: 13px; color: var(--text); line-height: 1.6; }
+  .header-meta a { color: var(--accent); text-decoration: none; }
+  .header-meta a:hover { text-decoration: underline; }
+
+  /* author credit line */
+  .author-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+  }
+  .author-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: #f0f2f7;
+  }
+  .author-role {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .linkedin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    background: rgba(10, 102, 194, 0.15);
+    color: #5aacf5;
+    border: 1px solid rgba(10, 102, 194, 0.35);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .linkedin-badge:hover {
+    background: rgba(10, 102, 194, 0.25);
+    border-color: rgba(10, 102, 194, 0.55);
+    text-decoration: none;
+  }
+  .linkedin-badge svg { width: 11px; height: 11px; fill: currentColor; flex-shrink: 0; }
+
+  /* ── breadcrumb ── */
+  .breadcrumb {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 14px 32px 0;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  .breadcrumb span { margin: 0 6px; }
+
+  /* ── main ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+  }
+
+  /* ── notebook content ── */
+  .nb-content { display: flex; flex-direction: column; gap: 0; }
+  .nb-cell { padding: 0; }
+
+  /* ── prose styling ── */
+  .nb-cell h1 {
+    font-size: clamp(22px, 3.5vw, 32px);
+    font-weight: 500;
+    color: #f0f2f7;
+    line-height: 1.25;
+    margin: 40px 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nb-cell h2 {
+    font-size: 20px;
+    font-weight: 500;
+    color: #e8eaf2;
+    margin: 48px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nb-cell h3 {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent2);
+    margin: 28px 0 10px;
+    font-family: var(--mono);
+    letter-spacing: 0.02em;
+  }
+  .nb-cell p { margin-bottom: 14px; color: var(--text); }
+  .nb-cell ul, .nb-cell ol { margin: 0 0 14px 22px; }
+  .nb-cell li { margin-bottom: 8px; }
+  .nb-cell strong { color: #eef0f6; font-weight: 500; }
+  .nb-cell em { color: var(--text); font-style: italic; }
+  .nb-cell a { color: var(--accent); text-decoration: none; }
+  .nb-cell a:hover { text-decoration: underline; }
+  .nb-cell hr { border: none; border-top: 1px solid var(--border); margin: 8px 0 0; }
+
+  /* tables */
+  .nb-cell table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 20px;
+    font-size: 13.5px;
+  }
+  .nb-cell th {
+    text-align: left;
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .nb-cell td {
+    padding: 9px 12px;
+    border-bottom: 1px solid rgba(37,43,56,0.6);
+    vertical-align: top;
+    color: var(--text);
+  }
+  .nb-cell tr:last-child td { border-bottom: none; }
+  .nb-cell tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* inline code */
+  .nb-cell code {
+    background: rgba(79,156,249,0.08);
+    color: #93c5fd;
+    font-family: var(--mono);
+    font-size: 0.88em;
+    padding: 1px 6px;
+    border-radius: 4px;
+  }
+
+  /* pill links */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 14px;
+    margin: 4px 6px 4px 0;
+    border: 1px solid rgba(79,156,249,0.4);
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--accent);
+    background: rgba(79,156,249,0.07);
+    font-family: var(--mono);
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .pill:hover {
+    background: rgba(79,156,249,0.14);
+    border-color: rgba(79,156,249,0.7);
+    text-decoration: none;
+  }
+
+  /* info callout boxes */
+  .info-box {
+    border-left: 4px solid var(--accent2);
+    background: rgba(167,139,250,0.06);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: var(--text);
+  }
+  .info-box p { margin: 0 0 6px 0; }
+  .info-box p:last-of-type { margin-bottom: 0; }
+
+  /* demo callout boxes */
+  .demo-box {
+    border-left: 4px solid var(--accent);
+    background: rgba(79,156,249,0.06);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    color: var(--text);
+  }
+  .demo-box p { margin: 0 0 6px 0; }
+  .demo-box p:last-of-type { margin-bottom: 0; }
+
+  /* footer cell */
+  .nb-footer-cell {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 2px solid var(--border);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .nb-footer-cell b { color: var(--text); }
+  .nb-footer-cell a { color: var(--accent); text-decoration: none; }
+  .nb-footer-cell a:hover { text-decoration: underline; }
+
+  /* ── page footer ── */
+  footer {
+    border-top: 2px solid var(--border);
+    padding: 18px 32px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  footer p + p { margin-top: 4px; font-size: 12px; color: var(--muted); }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── MathJax display equation containment ── */
+  .nb-cell .MathJax { max-width: 100%; overflow-x: visible; }
+  mjx-container[display="true"] {
+    overflow-x: auto;
+    max-width: 100%;
+    display: block;
+    margin: 1.1em auto;
+  }
+
+  /* ── step boxes for bottom-up approach ── */
+  .step-box {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    padding: 18px 22px;
+    margin: 20px 0;
+  }
+  .step-box .step-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .step-box h4 {
+    font-size: 15px;
+    font-weight: 500;
+    color: #eef0f6;
+    margin-bottom: 10px;
+  }
+  .step-box p { margin-bottom: 8px; }
+  .step-box p:last-of-type { margin-bottom: 0; }
+
+  .step-box.step-1 { border-left: 3px solid var(--green); }
+  .step-box.step-2 { border-left: 3px solid var(--accent); }
+  .step-box.step-3 { border-left: 3px solid var(--accent2); }
+
+  /* figure caption */
+  .fig-caption {
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 10px;
+    margin-bottom: 4px;
+  }
+
+  /* reference list spacing */
+  .nb-cell ol.refs li { margin-bottom: 16px; }
+  .nb-cell ol.refs li p { margin-bottom: 4px; }
+
+  @media (max-width: 600px) {
+    .header-inner, main, footer, .breadcrumb { padding-left: 20px; padding-right: 20px; }
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<header>
+  <div class="header-inner">
+    <div class="header-logo">
+      <img src="../assets/ams_group_tui.png" alt="AMS Group – TU Ilmenau">
+    </div>
+    <div class="header-info">
+      <h1>[WS26/27] Research Seminar / Forschungsseminar (MT und MIW)</h1>
+      <h2>NB00: Project Overview — Physics-Informed Neural Networks for Stiff Guitar String Vibrations</h2>
+      <p class="header-meta">
+        <strong>Institut für Medientechnik –
+          <a href="https://www.tu-ilmenau.de/universitaet/fakultaeten/fakultaet-elektrotechnik-und-informationstechnik/profil/institute-und-fachgebiete/fachgebiet-angewandte-mediensysteme"
+             target="_blank" rel="noopener">AMS Group</a>
+          – Technische Universität Ilmenau</strong><br>
+        <strong>Fachgebietsleiter:</strong> Prof. Dr.-Ing. Gerald Schuller
+      </p>
+      <div class="author-line">
+        <span class="author-role">Wissenschaftlicher Mitarbeiter &amp; Author</span>
+        <span class="author-name">Renato Fera P.</span>
+        <a class="linkedin-badge"
+           href="https://www.linkedin.com/in/renato-profeta/"
+           target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="breadcrumb">
+  <a href="index.html">Research Seminar Materials</a>
+  <span>›</span>
+  NB00: Project Overview
+</nav>
+
+<main>
+<div class="nb-content">
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Cell 1 — Title and Introduction                        -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-cell">
+<h1>NB00: Project Overview</h1>
+<p>
+  This document orients you to the Forschungsseminar project. It explains what you are building,
+  why the problem is physically interesting, what equations govern it, and how to approach the work.
+  Read it carefully — it is your reference throughout the semester. Everything else you need, you
+  will find through independent study of the literature provided.
+</p>
+</div>
+
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Cell 2 — The Physics Problem                           -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-cell">
+<hr />
+<h2>1. The Physics Problem</h2>
+
+<p>
+  Guitar strings are not ideal: they are made of metal wire that resists bending as well as
+  stretching. This <strong>bending stiffness</strong> causes different vibrational frequencies to
+  travel at different speeds along the string — a phenomenon called <strong>dispersion</strong>.
+  Dispersion makes the overtones of a real guitar string slightly sharp relative to the ideal
+  harmonic series, producing the characteristic bright, slightly inharmonic timbre of the
+  instrument. Capturing this effect accurately in a physical simulation is both musically important
+  and numerically demanding.
+</p>
+<p>
+  Three fundamentally different approaches can be used to simulate this system: an
+  <strong>analytical modal solution</strong>, a
+  <strong>finite-difference time-domain (FDTD) simulation</strong>, and a
+  <strong>Physics-Informed Neural Network (PINN)</strong>. Each has different strengths and
+  weaknesses in terms of accuracy, computational cost, and flexibility. Your task is to understand,
+  implement, and critically compare all three.
+</p>
+
+<h3>Governing Equation</h3>
+<p>
+  The transverse displacement $u(x, t)$ of the string at position $x$ and time $t$ is governed
+  by the following PDE, following the model of Luan et al.&nbsp;[1]:
+</p>
+
+$$\begin{aligned}
+\rho A \,\frac{\partial^2 u}{\partial t^2}
+  &- T \,\frac{\partial^2 u}{\partial x^2}
+  + EI \,\frac{\partial^4 u}{\partial x^4} \\[6pt]
+  &+ 2\rho A \sigma_0 \,\frac{\partial u}{\partial t}
+  - 2\rho A \sigma_1 \,\frac{\partial^3 u}{\partial t\,\partial x^2}
+  = 0
+\end{aligned}$$
+
+<p>Each group of terms plays a distinct physical role:</p>
+<ul>
+  <li>The first two terms ($\rho A\,\partial_{tt} u$ and $-T\,\partial_{xx} u$) form the
+      <strong>ideal wave equation</strong> — the standard model for a perfectly flexible string
+      under tension.</li>
+  <li>The third term ($EI\,\partial_{xxxx} u$) is the <strong>bending stiffness term</strong>:
+      it involves a fourth-order spatial derivative and is responsible for dispersion.</li>
+  <li>The last two terms model <strong>damping</strong>: $\sigma_0$ is a frequency-independent
+      loss (viscous drag), and $\sigma_1$ introduces frequency-dependent loss (internal material
+      friction).</li>
+</ul>
+
+<h3>Parameters</h3>
+<table>
+  <thead>
+    <tr><th>Symbol</th><th>Meaning</th><th>Unit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>$u(x,t)$</td><td>Transverse displacement of the string</td><td>m</td></tr>
+    <tr><td>$\rho$</td><td>Linear density (mass per unit volume)</td><td>kg/m³</td></tr>
+    <tr><td>$A$</td><td>Cross-sectional area</td><td>m²</td></tr>
+    <tr><td>$T$</td><td>String tension</td><td>N</td></tr>
+    <tr><td>$E$</td><td>Young's modulus (material stiffness)</td><td>Pa</td></tr>
+    <tr><td>$I$</td><td>Second moment of area of the cross-section</td><td>m⁴</td></tr>
+    <tr><td>$\sigma_0$</td><td>Frequency-independent damping coefficient</td><td>s⁻¹</td></tr>
+    <tr><td>$\sigma_1$</td><td>Frequency-dependent damping coefficient</td><td>m²/s</td></tr>
+    <tr><td>$L$</td><td>String length</td><td>m</td></tr>
+  </tbody>
+</table>
+
+<h3>Initial Conditions: the Pluck</h3>
+<p>
+  The string is excited by a pluck: it is displaced into a triangular profile and released from
+  rest. The apex of the triangle is at position $x_1$ with maximum displacement $y$:
+</p>
+
+$$u(x,\,0) = \begin{cases}
+  \dfrac{y}{x_1}\,x, & 0 \le x \le x_1 \\[10pt]
+  \dfrac{y}{L - x_1}\,(L - x), & x_1 < x \le L
+\end{cases}
+\qquad
+\frac{\partial u}{\partial t}(x,\,0) = 0$$
+
+<p>
+  The condition $\partial_t u = 0$ at $t = 0$ means the string starts from rest —
+  displaced but not yet moving.
+</p>
+
+<h3>Boundary Conditions</h3>
+<p>
+  Both ends of the string are <strong>simply supported</strong> (pinned): displacement is fixed
+  to zero and there is no bending moment at either end:
+</p>
+
+$$u(0,\,t) = u(L,\,t) = 0,
+\qquad
+\frac{\partial^2 u}{\partial x^2}(0,\,t)
+= \frac{\partial^2 u}{\partial x^2}(L,\,t) = 0$$
+
+<p>
+  The first pair fixes the string's endpoints; the second pair enforces zero curvature at the
+  supports, which is the mathematical expression of zero bending moment.
+</p>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Cell 3 — Your Approach                                 -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-cell">
+<hr />
+<h2>2. Your Approach</h2>
+
+<!-- ── Phase 1 ── -->
+<h3>Phase 1 — Study and Literature Review</h3>
+
+<p>
+  Before writing a single line of code, you must build a solid understanding of the methods and
+  the problem domain. Work through the following topics independently, using the literature listed
+  in Section 4 as your starting point. This understanding is a prerequisite for the topic
+  understanding presentation.
+</p>
+
+<ol>
+  <li>
+    <strong>Read the main reference paper.</strong> Luan et al.&nbsp;[1] is your primary technical
+    reference. Understand their problem formulation, PINN architecture, loss function, and results
+    before anything else.
+  </li>
+  <li>
+    <strong>Study PDEs and analytical solutions.</strong> Understand what a partial differential
+    equation is, what boundary and initial conditions mean, and how to find an analytical modal
+    solution through separation of variables. You will need to derive the modal solution for the
+    stiff string yourself.
+  </li>
+  <li>
+    <strong>Study FDTD simulation.</strong> Understand the finite-difference time-domain method:
+    how continuous derivatives are approximated on a discrete grid, how the update equation is
+    derived, and crucially, what determines numerical stability. Bilbao&nbsp;[3] and
+    Välimäki et al.&nbsp;[4] are the key references here.
+  </li>
+  <li>
+    <strong>Study Physics-Informed Neural Networks.</strong> Understand the PINN framework: how
+    the PDE, initial conditions, and boundary conditions are incorporated into a neural network
+    loss function. Raissi et al.&nbsp;[2] is the foundational reference; Luan et al.&nbsp;[1]
+    shows the application to your specific problem.
+  </li>
+  <li>
+    <strong>Study evaluation metrics.</strong> Understand how to compare numerical solutions
+    quantitatively: L² error, L∞ error, relative error, and computational cost. You will need
+    to justify your choice of metrics in the project report.
+  </li>
+  <li>
+    <strong>Conduct a literature review</strong> on the <strong>state of the art</strong> of
+    PINNs for guitar and musical instrument modelling, with a strong emphasis on the
+    <strong>latest publications</strong>. Focus your search first on <strong>guitar strings</strong>;
+    if the literature is sparse, broaden to <strong>string instruments</strong>, and then to
+    <strong>musical instruments</strong> in general. Go beyond the references provided here —
+    search for related work and critically assess what has been done, what works, and what remains
+    open. Currency of sources matters: prioritise recent work over older surveys.
+  </li>
+</ol>
+
+<div class="info-box">
+  <p><strong>Literature review scope:</strong> Your review must cover three areas: (1) physical
+  modelling of stiff strings, (2) foundational PINN methods, and (3) <strong>state-of-the-art and
+  latest publications</strong> on PINN applications in musical acoustics. Prioritise work on
+  <strong>guitar strings</strong>; if the literature is sparse, broaden to <strong>string
+  instruments</strong>, then to <strong>musical instruments</strong> more generally. The references
+  in Section 4 are your starting point — not your ending point. Use them to trace forward and
+  backward through the literature, with a strong emphasis on the most recent work.</p>
+</div>
+
+<!-- ── Phase 2 ── -->
+<h3>Phase 2 — Bottom-Up Implementation</h3>
+
+<p>
+  Once you understand the methods, implement them using a <strong>bottom-up strategy</strong>:
+  start with the simplest possible version of the PDE and progressively add complexity. At each
+  level, implement all three methods (analytical, FDTD, PINN), evaluate them, and confirm they
+  agree before moving to the next step. This approach catches bugs early, builds physical
+  intuition, and produces a natural structure for your project report.
+</p>
+
+<div class="step-box step-1">
+  <div class="step-label">Step 1</div>
+  <h4>Ideal Wave Equation — tension only</h4>
+  <p>
+    Strip away all complexity and start with the simplest string model, with no stiffness
+    and no damping:
+  </p>
+  $$\rho A \,\frac{\partial^2 u}{\partial t^2}
+    - T \,\frac{\partial^2 u}{\partial x^2} = 0$$
+  <p>
+    Derive the analytical modal solution, implement the FDTD scheme, and implement a PINN
+    for this equation. Use the same initial and boundary conditions throughout (triangular
+    pluck, simply supported ends). Evaluate all three and confirm they match before proceeding.
+  </p>
+</div>
+
+<div class="step-box step-2">
+  <div class="step-label">Step 2</div>
+  <h4>Stiff String — add bending stiffness</h4>
+  <p>
+    Add the fourth-order bending stiffness term:
+  </p>
+  $$\rho A \,\frac{\partial^2 u}{\partial t^2}
+    - T \,\frac{\partial^2 u}{\partial x^2}
+    + EI \,\frac{\partial^4 u}{\partial x^4} = 0$$
+  <p>
+    This is where dispersion appears. The analytical modal frequencies change, the FDTD
+    stability condition becomes significantly tighter (the fourth-order term imposes a much
+    stricter constraint on the time step), and the PINN must now compute fourth-order spatial
+    derivatives through automatic differentiation. Extend each of your three implementations,
+    evaluate, and compare again.
+  </p>
+</div>
+
+<div class="step-box step-3">
+  <div class="step-label">Step 3</div>
+  <h4>Full Model — add damping</h4>
+  <p>
+    Finally, add the two damping terms to arrive at the complete model from Luan et al.&nbsp;[1]:
+  </p>
+  $$\begin{aligned}
+  \rho A \,\frac{\partial^2 u}{\partial t^2}
+    &- T \,\frac{\partial^2 u}{\partial x^2}
+    + EI \,\frac{\partial^4 u}{\partial x^4} \\[6pt]
+    &+ 2\rho A \sigma_0 \,\frac{\partial u}{\partial t}
+    - 2\rho A \sigma_1 \,\frac{\partial^3 u}{\partial t\,\partial x^2}
+    = 0
+  \end{aligned}$$
+  <p>
+    With damping, the analytical solution gains exponential decay envelopes, the FDTD scheme
+    must handle the mixed time–space derivative term, and the PINN loss must include the full
+    residual. Evaluate all three methods on this final model and produce your quantitative
+    comparison.
+  </p>
+</div>
+
+<!-- ── SVG Diagram ── -->
+<div style="margin: 36px 0 8px;">
+
+<svg viewBox="0 0 760 480" width="100%" preserveAspectRatio="xMidYMid meet"
+     xmlns="http://www.w3.org/2000/svg"
+     style="display:block; border-radius:8px; background:#161a22;"
+     font-family="'IBM Plex Sans', sans-serif">
+
+  <!-- ── Background ── -->
+  <rect width="760" height="480" fill="#161a22" rx="8"/>
+
+  <!-- ══ Column header row ══ -->
+  <!-- Row label header (empty) -->
+  <rect x="8" y="8" width="162" height="40" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+
+  <!-- Analytical header -->
+  <rect x="178" y="8" width="181" height="40" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="268" y="23" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.06em"
+        fill="#34d399" text-transform="uppercase">ANALYTICAL</text>
+  <text x="268" y="38" text-anchor="middle" font-size="10"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">Modal Solution</text>
+
+  <!-- FDTD header -->
+  <rect x="367" y="8" width="181" height="40" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="457" y="23" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.06em"
+        fill="#4f9cf9">FDTD</text>
+  <text x="457" y="38" text-anchor="middle" font-size="10"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">Finite Differences</text>
+
+  <!-- PINN header -->
+  <rect x="556" y="8" width="196" height="40" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="654" y="23" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.06em"
+        fill="#a78bfa">PINN</text>
+  <text x="654" y="38" text-anchor="middle" font-size="10"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">Neural Network</text>
+
+  <!-- ══ STEP 1 ROW (y=58..178) ══ -->
+  <!-- Row label -->
+  <rect x="8" y="58" width="162" height="120" rx="5" fill="#0d0f14" stroke="#34d399" stroke-width="1.5"/>
+  <text x="89" y="80" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.08em"
+        fill="#34d399">STEP 1</text>
+  <text x="89" y="98" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Wave Equation</text>
+  <text x="89" y="114" text-anchor="middle" font-size="10" fill="#5a6175">Tension only,</text>
+  <text x="89" y="128" text-anchor="middle" font-size="10" fill="#5a6175">no stiffness,</text>
+  <text x="89" y="142" text-anchor="middle" font-size="10" fill="#5a6175">no damping</text>
+  <text x="89" y="160" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">ρA∂ₜₜu − T∂ₓₓu = 0</text>
+
+  <!-- Step 1 / Analytical card -->
+  <rect x="178" y="58" width="181" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="268" y="80" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Derive modal</text>
+  <text x="268" y="96" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">frequencies &amp; modes</text>
+  <text x="268" y="116" text-anchor="middle" font-size="11" fill="#5a6175">Separation of variables</text>
+  <text x="268" y="132" text-anchor="middle" font-size="11" fill="#5a6175">sinusoidal eigenfunctions</text>
+
+  <!-- Step 1 / FDTD card -->
+  <rect x="367" y="58" width="181" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="457" y="80" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">FTCS scheme</text>
+  <text x="457" y="96" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">2nd-order in space</text>
+  <text x="457" y="116" text-anchor="middle" font-size="11" fill="#5a6175">CFL stability condition</text>
+  <text x="457" y="132" text-anchor="middle" font-size="11" fill="#5a6175">Δt ≤ Δx / c</text>
+
+  <!-- Step 1 / PINN card -->
+  <rect x="556" y="58" width="196" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="654" y="80" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">PDE + IC + BC loss</text>
+  <text x="654" y="96" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">2nd-order autograd</text>
+  <text x="654" y="116" text-anchor="middle" font-size="11" fill="#5a6175">MLP with tanh</text>
+  <text x="654" y="132" text-anchor="middle" font-size="11" fill="#5a6175">collocation points</text>
+
+  <!-- Step 1 / Evaluate bar -->
+  <rect x="178" y="162" width="574" height="16" rx="4" fill="#252b38"/>
+  <text x="465" y="174" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.05em"
+        fill="#fb923c">✓  EVALUATE &amp; COMPARE</text>
+
+  <!-- Arrow Step 1 → Step 2 -->
+  <text x="89" y="203" text-anchor="middle" font-size="18" fill="#5a6175">↓</text>
+  <text x="89" y="218" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">add stiffness</text>
+
+  <!-- ══ STEP 2 ROW (y=228..348) ══ -->
+  <rect x="8" y="228" width="162" height="120" rx="5" fill="#0d0f14" stroke="#4f9cf9" stroke-width="1.5"/>
+  <text x="89" y="250" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.08em"
+        fill="#4f9cf9">STEP 2</text>
+  <text x="89" y="268" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Stiff String</text>
+  <text x="89" y="284" text-anchor="middle" font-size="10" fill="#5a6175">+ Bending stiffness,</text>
+  <text x="89" y="298" text-anchor="middle" font-size="10" fill="#5a6175">no damping</text>
+  <text x="89" y="318" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">+ EI∂ₓₓₓₓu</text>
+  <text x="89" y="332" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">dispersion appears</text>
+
+  <!-- Step 2 / Analytical card -->
+  <rect x="178" y="228" width="181" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="268" y="250" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Modified modal</text>
+  <text x="268" y="266" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">frequencies (stiff)</text>
+  <text x="268" y="286" text-anchor="middle" font-size="11" fill="#5a6175">Inharmonic overtones</text>
+  <text x="268" y="302" text-anchor="middle" font-size="11" fill="#5a6175">derive new ωₙ</text>
+
+  <!-- Step 2 / FDTD card -->
+  <rect x="367" y="228" width="181" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="457" y="250" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">4th-order FD scheme</text>
+  <text x="457" y="266" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">for ∂ₓₓₓₓu</text>
+  <text x="457" y="286" text-anchor="middle" font-size="11" fill="#5a6175">Tighter stability: much</text>
+  <text x="457" y="302" text-anchor="middle" font-size="11" fill="#5a6175">smaller Δt required</text>
+
+  <!-- Step 2 / PINN card -->
+  <rect x="556" y="228" width="196" height="96" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="654" y="250" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Add 4th-order term</text>
+  <text x="654" y="266" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">to PDE residual</text>
+  <text x="654" y="286" text-anchor="middle" font-size="11" fill="#5a6175">Autograd computes</text>
+  <text x="654" y="302" text-anchor="middle" font-size="11" fill="#5a6175">∂⁴u/∂x⁴ exactly</text>
+
+  <!-- Step 2 / Evaluate bar -->
+  <rect x="178" y="332" width="574" height="16" rx="4" fill="#252b38"/>
+  <text x="465" y="344" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.05em"
+        fill="#fb923c">✓  EVALUATE &amp; COMPARE</text>
+
+  <!-- Arrow Step 2 → Step 3 -->
+  <text x="89" y="373" text-anchor="middle" font-size="18" fill="#5a6175">↓</text>
+  <text x="89" y="388" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">add damping</text>
+
+  <!-- ══ STEP 3 ROW (y=398..448) ══ -->
+  <rect x="8" y="398" width="162" height="74" rx="5" fill="#0d0f14" stroke="#a78bfa" stroke-width="1.5"/>
+  <text x="89" y="419" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.08em"
+        fill="#a78bfa">STEP 3</text>
+  <text x="89" y="436" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Full Model</text>
+  <text x="89" y="452" text-anchor="middle" font-size="10" fill="#5a6175">+ Damping (σ₀, σ₁)</text>
+  <text x="89" y="466" text-anchor="middle" font-size="9"
+        font-family="'IBM Plex Mono', monospace" fill="#5a6175">target equation</text>
+
+  <!-- Step 3 / Analytical card -->
+  <rect x="178" y="398" width="181" height="50" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="268" y="420" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Modal solution</text>
+  <text x="268" y="436" text-anchor="middle" font-size="11" fill="#5a6175">+ exponential decay</text>
+
+  <!-- Step 3 / FDTD card -->
+  <rect x="367" y="398" width="181" height="50" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="457" y="420" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Handle mixed</text>
+  <text x="457" y="436" text-anchor="middle" font-size="11" fill="#5a6175">∂ₜ∂ₓₓu derivative</text>
+
+  <!-- Step 3 / PINN card -->
+  <rect x="556" y="398" width="196" height="50" rx="5" fill="#0d0f14" stroke="#252b38" stroke-width="1"/>
+  <text x="654" y="420" text-anchor="middle" font-size="12" font-weight="500" fill="#d8dce6">Full PDE residual</text>
+  <text x="654" y="436" text-anchor="middle" font-size="11" fill="#5a6175">all loss terms active</text>
+
+  <!-- Step 3 / Final Evaluate bar -->
+  <rect x="178" y="456" width="574" height="16" rx="4" fill="#252b38"/>
+  <text x="465" y="468" text-anchor="middle" font-size="10" font-weight="500"
+        font-family="'IBM Plex Mono', monospace" letter-spacing="0.05em"
+        fill="#fb923c">✓  EVALUATE &amp; COMPARE  —  FINAL RESULTS</text>
+
+</svg>
+
+<p class="fig-caption">
+  Figure 1: Bottom-up implementation strategy. At each complexity level, all three methods are
+  implemented, evaluated, and validated before adding the next layer of physics.
+</p>
+</div>
+
+<div class="demo-box">
+  <p><strong>Why bottom-up?</strong> Debugging a full stiff string PINN from scratch is extremely
+  difficult. If you start at Step 1 and confirm each method works correctly on the ideal wave
+  equation before adding stiffness, you will immediately know which term introduces any new
+  behaviour or bug. Each step adds exactly one new mathematical feature — dispersion at Step 2,
+  damping at Step 3 — so the differences between steps are physically interpretable and easy
+  to reason about.</p>
+</div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Cell 4 — Your Tasks                                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-cell">
+<hr />
+<h2>3. Your Tasks</h2>
+
+<p>
+  The following tasks define the full scope of the project. They follow directly from the approach
+  described in Section 2. All tasks must be documented in the scientific project report and covered
+  in the final presentation.
+</p>
+
+<ol>
+  <li>
+    <strong>Literature review.</strong> Conduct a thorough literature review focusing on
+    <strong>state-of-the-art and latest publications</strong> on PINNs applied to guitar string
+    and musical instrument modelling in musical acoustics, covering physical modelling of stiff
+    strings, foundational PINN methods, and recent PINN applications. Prioritise work on
+    <strong>guitar strings</strong>; if literature is insufficient, broaden the search to
+    <strong>string instruments</strong>, then to <strong>musical instruments</strong> in general.
+    The starting references are listed in Section 4.
+  </li>
+  <li>
+    <strong>Analytical modal solution.</strong> Following the bottom-up strategy, derive and
+    implement the analytical modal solution at each level of PDE complexity (ideal wave equation
+    → stiff string without damping → full stiff string model). Use this solution as the
+    reference ground truth for all quantitative comparisons. No experimental or measured data
+    is used — the analytical solution serves as the sole reference.
+  </li>
+  <li>
+    <strong>FDTD simulation.</strong> Derive and implement the FDTD scheme at each complexity
+    level. For each step, derive the stability condition and validate numerically against the
+    analytical modal solution.
+  </li>
+  <li>
+    <strong>PINN implementation.</strong> Implement a PINN at each complexity level, following
+    the architecture and loss formulation of Luan et al.&nbsp;[1]. The PDE residual, the initial
+    conditions, and all four boundary conditions must be incorporated into the loss function at
+    every step. All comparisons are made against the analytical modal solution and the FDTD
+    simulation — no experimental data is involved.
+  </li>
+  <li>
+    <strong>Quantitative comparison.</strong> At each complexity level, and especially on the
+    full model, select appropriate error metrics and compare all three methods quantitatively.
+    Discuss accuracy, computational cost, numerical stability, and suitability for sound
+    synthesis applications.
+  </li>
+</ol>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Cell 5 — Literature                                    -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-cell">
+<hr />
+<h2>4. Literature</h2>
+
+<p>
+  The following references are your starting point. Use them in your literature review and cite
+  them appropriately in your project report. You are expected to find and include additional
+  relevant work beyond what is listed here.
+</p>
+
+<ol class="refs">
+  <li>
+    <p>
+      Luan, X., Okada, K., Tabata, R., &amp; Scavone, G. (2026).
+      Towards Physics-Informed Neural Networks for Stiff Guitar String Vibrations.
+      <em>arXiv:2609.21795</em>.
+    </p>
+    <a class="pill" href="https://arxiv.org/abs/2609.21795" target="_blank" rel="noopener">arXiv ↗</a>
+  </li>
+  <li>
+    <p>
+      Raissi, M., Perdikaris, P., &amp; Karniadakis, G. E. (2019).
+      Physics-informed neural networks: A deep learning framework for solving forward and inverse
+      problems involving nonlinear partial differential equations.
+      <em>Journal of Computational Physics, 378</em>, 686–707.
+    </p>
+    <a class="pill" href="https://doi.org/10.1016/j.jcp.2018.10.045" target="_blank" rel="noopener">DOI ↗</a>
+    <a class="pill" href="https://arxiv.org/abs/1711.10561" target="_blank" rel="noopener">arXiv ↗</a>
+  </li>
+  <li>
+    <p>
+      Bilbao, S. (2009).
+      <em>Numerical Sound Synthesis: Finite Difference Schemes and Simulation in Musical
+      Acoustics</em>. Wiley.
+    </p>
+    <a class="pill" href="https://www.wiley.com/en-us/shop/general-introductory-electrical-electronics-engineering/numerical-sound-synthesis-finite-difference-schemes-and-simulation-in-musical-acoustics-p-9780470510469" target="_blank" rel="noopener">Wiley ↗</a>
+  </li>
+  <li>
+    <p>
+      Välimäki, V., Pakarinen, J., Erkut, C., &amp; Karjalainen, M. (2006).
+      Discrete-time modelling of musical instruments.
+      <em>Reports on Progress in Physics, 69</em>(1), 1–78.
+    </p>
+    <a class="pill" href="https://doi.org/10.1088/0034-4885/69/1/R01" target="_blank" rel="noopener">DOI ↗</a>
+  </li>
+  <li>
+    <p>
+      Luan, X., &amp; Scavone, G. (2025).
+      Physics-Informed Deep Learning for Nonlinear Friction Model of Bow-String Interaction.
+      <em>DAFx 2025</em>.
+    </p>
+    <a class="pill" href="https://arxiv.org/abs/2505.18950" target="_blank" rel="noopener">arXiv ↗</a>
+  </li>
+</ol>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- Footer cell                                            -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="nb-footer-cell">
+  <p><strong>[WS26/27] Research Seminar / Forschungsseminar (MT und MIW)</strong> &middot; NB00: Project Overview<br>
+  Institut für Medientechnik &ndash; Technische Universität Ilmenau</p>
+  <p>Notebook created by <strong>Renato Fera P.</strong> &middot;
+  <a href="https://www.linkedin.com/in/renato-profeta/" target="_blank" rel="noopener">LinkedIn</a></p>
+</div>
+
+</div><!-- /nb-content -->
+</main>
+
+<footer>
+  <p><strong>[WS26/27] Research Seminar / Forschungsseminar (MT und MIW)</strong> &middot; Seminar Materials<br>
+  Institut für Medientechnik &ndash; Technische Universität Ilmenau</p>
+  <p>
+    Page maintained by <strong>Renato Fera P.</strong> &middot;
+    <a href="https://www.linkedin.com/in/renato-profeta/" target="_blank" rel="noopener">LinkedIn</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/[ORG]/[REPO_NAME]" target="_blank" rel="noopener">github.com/[ORG]/[REPO_NAME]</a>
+  </p>
+</footer>
+
+</body>
+</html>

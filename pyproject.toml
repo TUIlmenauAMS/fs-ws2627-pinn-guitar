@@ -1,0 +1,67 @@
+# =============================================================================
+# pyproject.toml — Forschungsseminar: PINNs for Stiff Guitar String Vibrations
+# =============================================================================
+# Author   : Renato Fera P.
+# LinkedIn : https://www.linkedin.com/in/renato-profeta/
+# Course   : Forschungsseminar – PINNs for Stiff Guitar String Vibrations
+# Institute: Institut für Medientechnik, Technische Universität Ilmenau
+# -----------------------------------------------------------------------------
+# Package manager: uv  (https://docs.astral.sh/uv/)
+#
+# Quick start:
+#   curl -LsSf https://astral.sh/uv/install.sh | sh   # install uv (Linux/WSL)
+#   winget install --id=astral-sh.uv -e               # install uv (Windows)
+#
+#   git clone https://github.com/TUIlmenauAMS/<YOUR_REPO_HERE>
+#   cd <YOUR_REPO_HERE>
+#
+#   uv sync                                           # create .venv and install all deps
+#   # open the repo in VS Code and select the .venv interpreter as the kernel
+#
+# Ubuntu system dependencies: none required — all Python packages are self-contained.
+# Windows: no system dependencies needed either.
+# =============================================================================
+
+[project]
+name = "forschungsseminar-pinns"
+version = "0.1.0"
+description = "Tutorial materials for Forschungsseminar – PINNs for Stiff Guitar String Vibrations"
+readme = "README.md"
+authors = [
+    { name = "Renato Fera P.", email = "renato.profeta@tu-ilmenau.de" }
+]
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "matplotlib>=3.8",
+    "sympy>=1.13",
+    "scipy>=1.12",
+    "torch>=2.2",
+    "pandas>=2.2",
+]
+
+[dependency-groups]
+dev = [
+    "ipykernel>=6.29",     # VS Code Jupyter extension uses this to run notebooks
+    "nbconvert>=7.14",     # used by GitHub Actions CI to render notebooks to HTML
+]
+
+# ── Ruff linter configuration ─────────────────────────────────────────────────
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP"]
+# E/W = pycodestyle errors and warnings
+# F   = Pyflakes (undefined names, unused imports)
+# I   = isort (import ordering — keeps imports grouped and sorted)
+# UP  = pyupgrade (enforces modern Python syntax)
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
