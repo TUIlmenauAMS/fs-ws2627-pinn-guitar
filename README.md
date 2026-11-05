@@ -1,12 +1,14 @@
 # Physics-Informed Neural Networks for Stiff Guitar String Vibrations
 
+<img src="assets/ams_group_tui.png" alt="AMS Group – TU Ilmenau" width="100">
+
 > **[WS26/27] Research Seminar / Forschungsseminar (MT und MIW)**  
 > Institut für Medientechnik · AMS Group · Technische Universität Ilmenau
 
 | | |
 |---|---|
-| **Supervisor** | Prof. Dr.-Ing. Gerald Schuller |
-| **Author** | Renato Fera P. · [![LinkedIn](https://img.shields.io/badge/LinkedIn-renato--profeta-0a66c2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/renato-profeta/) |
+| **Supervisor** | Renato Fera P. · [![LinkedIn](https://img.shields.io/badge/LinkedIn-renato--profeta-0a66c2?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/renato-profeta/) |
+| **Fachgebietsleiter** | Prof. Dr.-Ing. Gerald Schuller |
 | **Repository** | [github.com/TUIlmenauAMS/fs-ws2627-pinn-guitar](https://github.com/TUIlmenauAMS/fs-ws2627-pinn-guitar) |
 
 ---
@@ -63,8 +65,6 @@ uv sync        # creates .venv and installs all dependencies
 ```
 
 Then open the repository in VS Code and select the `.venv` interpreter as the Jupyter kernel.
-
-**Dependencies** (Python ≥ 3.11): `numpy`, `matplotlib`, `sympy`, `scipy`, `torch`, `pandas`
 
 ---
 
