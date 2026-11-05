@@ -12,8 +12,8 @@
 #   curl -LsSf https://astral.sh/uv/install.sh | sh   # install uv (Linux/WSL)
 #   winget install --id=astral-sh.uv -e               # install uv (Windows)
 #
-#   git clone https://github.com/TUIlmenauAMS/<YOUR_REPO_HERE>
-#   cd <YOUR_REPO_HERE>
+#   git clone https://github.com/TUIlmenauAMS/fs-ws2627-pinn-guitar
+#   cd fs-ws2627-pinn-guitar
 #
 #   uv sync                                           # create .venv and install all deps
 #   # open the repo in VS Code and select the .venv interpreter as the kernel
