@@ -18,8 +18,13 @@
 #   uv sync                                           # create .venv and install all deps
 #   # open the repo in VS Code and select the .venv interpreter as the kernel
 #
-# Ubuntu system dependencies: none required — all Python packages are self-contained.
-# Windows: no system dependencies needed either.
+# Ubuntu / WSL system dependencies (NB03 only):
+#   sudo apt-get install -y gcc        # required by Devito at runtime
+#
+# NB03 extra dependencies (numba, py-pde, devito):
+#   uv sync --group nb03
+#
+# See configuration.html for full environment setup instructions.
 # =============================================================================
 
 [project]
@@ -44,6 +49,12 @@ dependencies = [
 dev = [
     "ipykernel>=6.29",     # VS Code Jupyter extension uses this to run notebooks
     "nbconvert>=7.14",     # used by GitHub Actions CI to render notebooks to HTML
+]
+
+nb03 = [
+    "numba>=0.59",     # NumPy + Numba: JIT-compiled FDTD — the professional default
+    "pde>=0.20",       # py-pde: high-level PDE solving
+    "devito>=4.8",     # Devito: stencil-based production PDE solver
 ]
 
 # ── Ruff linter configuration ─────────────────────────────────────────────────
